@@ -88,6 +88,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             holder.itemPrivateText.setText("Private");
         else
             holder.itemPrivateText.setText("Public");
+        holder.likeBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    Toast.makeText(context, "Liked", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(context, "Unliked", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -109,6 +118,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         TextView itemProfileName,itemDate,itemTime,itemDescription,itemPrivateText;
         ImageView itemImage,menuImage;
         CardView cv;
+        ToggleButton likeBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -121,6 +131,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             cv= itemView.findViewById(R.id.post_item_image_card);
             menuImage=itemView.findViewById(R.id.post_menu_image);
             itemPrivateText=itemView.findViewById(R.id.post_private_text);
+            likeBtn=itemView.findViewById(R.id.post_item_like_button);
         }
     }
 }
