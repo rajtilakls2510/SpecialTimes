@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "483980640932",
+    "firebase_url": "https://specialtimes-4e74d.firebaseio.com",
+    "project_id": "specialtimes-4e74d",
+    "storage_bucket": "specialtimes-4e74d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483980640932:android:fbad8b0f73355884241c31",
+        "android_client_info": {
+          "package_name": "rajtilak.pal.specialtimes1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "483980640932-o80pnc61mfbu886g4dsbabt9gs4liul4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rajtilak.pal.specialtimes1",
+            "certificate_hash": "e6c2923d1e31f2d4573e48968e064a659c05f369"
+          }
+        },
+        {
+          "client_id": "483980640932-3jou428hcecg6eqc6nkhue1lelann6b1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6qBTqL1aUOYrNFagqwm4bT8ocCFaWzWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "483980640932-3jou428hcecg6eqc6nkhue1lelann6b1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
