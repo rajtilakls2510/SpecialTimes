@@ -161,7 +161,8 @@ public class NewPostActivity extends AppCompatActivity {
 
     private void postPost() {
         Log.d(TAG, "postPost: Posting into database");
-        DatabaseReference postRef1=postRef.child(String.valueOf(System.currentTimeMillis()));
+        post.setPostId(String.valueOf(System.currentTimeMillis()));
+        DatabaseReference postRef1=postRef.child(post.getPostId());
         postRef1.setValue(post);
         Log.d(TAG, "postPost: Done Posting");
     }

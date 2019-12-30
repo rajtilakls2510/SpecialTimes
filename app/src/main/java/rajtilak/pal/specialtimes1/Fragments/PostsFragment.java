@@ -30,6 +30,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.security.cert.CollectionCertStoreParameters;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -163,18 +164,15 @@ public class PostsFragment extends Fragment{
         Log.d(TAG, "sortLists: Sorting Lists");
         sortedUsers=new ArrayList<>();
         sortedItems=new ArrayList<>(items);
-        Collections.sort(sortedItems, new Comparator<Posts>() {
-            @Override
-            public int compare(Posts posts, Posts t1) {
-                return (int)(t1.getPostDate()-posts.getPostDate());
-            }
-        });
+        Log.d(TAG, "sortLists: Unsorted items: ");
+        for(int i=0;i<sortedItems.size();i++)
+            Log.d(TAG, "sortLists: "+sortedItems.get(i).getPostId());
+        bubbleSort(sortedItems);
 
         for(int i=0;i<sortedItems.size();i++)
         {
             sortedUsers.add(users.get(items.indexOf(sortedItems.get(i))));
         }
-        Log.d(TAG, "sortLists: List Sorted. SortedUsers: "+sortedUsers);
         items.clear();
         users.clear();
         for(int i=0;i<sortedUsers.size();i++)
@@ -182,10 +180,31 @@ public class PostsFragment extends Fragment{
             items.add(sortedItems.get(i));
             users.add(sortedUsers.get(i));
         }
+        Log.d(TAG, "sortLists: Sorted items: ");
+        for(int i=0;i<sortedItems.size();i++)
+            Log.d(TAG, "sortLists: "+items.get(i).getPostId());
+
         Log.d(TAG, "sortLists: Notifying Data set changed");
         recyclerAdapter.notifyDataSetChanged();
         retrievePosts.setVisibility(View.GONE);
 
+    }
+
+    private void bubbleSort(ArrayList<Posts> sortedItems)
+    {
+        Posts temp;
+        for (int i=0;i<sortedItems.size()-1;i++)
+        {
+            for(int j=0;j<sortedItems.size()-i-1;j++)
+            {
+                if(sortedItems.get(j).getPostDate()<sortedItems.get(j+1).getPostDate())
+                {
+                    temp=sortedItems.get(j+1);
+                    sortedItems.remove(temp);
+                    sortedItems.add(j,temp);
+                }
+            }
+        }
     }
 
 
@@ -221,9 +240,10 @@ public class PostsFragment extends Fragment{
                     getUsers(post1, new UsersRetrieveCallback() {
                         @Override
                         public void retrieveUsers(Users user) {
-                            Log.d(TAG, "retrieveUsers: user: "+user.getName());
-                            if(!items.contains(post1))
+
+                            if(!listContains(items,post1))
                             {
+                                Log.d(TAG, "retrieveUsers: user: "+user.getName());
                                 users.add(0,user);
                                 items.add(0,post1);
                             }
@@ -238,6 +258,18 @@ public class PostsFragment extends Fragment{
 
             }
         });
+    }
+
+    private boolean listContains(ArrayList<Posts> item,Posts post1)
+    {
+        for(int i=0;i<item.size();i++)
+        {
+            if(item.get(i).getPostId().equals(post1.getPostId()))
+                return true;
+
+        }
+        return false;
+
     }
 
 
